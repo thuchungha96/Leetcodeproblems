@@ -1,0 +1,22 @@
+public class Solution {
+    public string[] GetFolderNames(string[] names) {
+        Dictionary<string, int> A = new Dictionary<string, int>();
+        if (!names.Any()) return names;
+        for (int i=0; i<names.Length; i++)
+        {
+            if (A.ContainsKey(names[i]))
+            {
+                int x= A[names[i]];
+                while (A.ContainsKey(names[i]+$"({x})")) x++;
+                A[names[i]] = x;
+                names[i] = names[i]+$"({x})";
+            }
+            A.Add(names[i],1);
+        }    
+        return names;
+    }
+}
+
+/*
+Dictionary has Key to check exited or not and value to check latest index to reduce run time
+*/
