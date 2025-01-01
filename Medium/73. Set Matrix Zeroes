@@ -1,0 +1,19 @@
+public class Solution {
+    public void SetZeroes(int[][] matrix) {
+        List<int> A = new List<int>();
+        List<int> B = new List<int>();
+        for (int i=0; i<matrix.Length; i++)
+            for (int j=0; j<matrix[i].Length; j++)
+                if (matrix[i][j] == 0)
+                    {
+                        A.Add(i);
+                        B.Add(j);
+                    }          
+        for (int i=0; i<A.Count(); i++){
+            for (int k=0; k<matrix.Length; k++)
+                matrix[k][B[i]] = 0;    
+            for (int k=0; k<matrix[0].Length; k++)
+                matrix[A[i]][k] = 0;                  
+        }     
+    }
+}
