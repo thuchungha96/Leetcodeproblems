@@ -1,0 +1,17 @@
+public class Solution {
+    public int MaxScore(string s) {
+        int max=0;
+        for (int i=1; i<s.Length; i++){
+            int A = countV(s.Substring(0,i),'0');
+            int B = countV(s.Substring(i,s.Length-i),'1');
+            max = max < (A +B) ? (A + B) : max;
+        }
+        return max;
+        
+    }
+    private int countV(string s,char v){
+        int c =0;
+        for (int i=0; i<s.Length; i++) if (s[i] == v) c++;
+        return c;
+    }
+}
