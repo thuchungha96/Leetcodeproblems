@@ -1,0 +1,9 @@
+public class Solution {
+    public int HammingWeight(int n) {
+        string bitString = Convert.ToString(n, 2).PadLeft(32, '0');
+        return bitString.Where(x => x == '1').Count();
+    }
+}
+/*
+https://leetcode.com/problems/number-of-1-bits/description/
+*/
