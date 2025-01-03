@@ -1,0 +1,27 @@
+using System.Text.RegularExpressions;  
+public class Solution {
+    public IList<string> FindRepeatedDnaSequences(string s) {
+        List<string> B = new List<string>();
+        Dictionary<string, int> A = new Dictionary<string, int>();
+        if (s.Length <= 10) return B;
+        for (int i=0; i<s.Length-9; i++){
+            string sb = s.Substring(i,10);
+            if (A.ContainsKey(sb))
+                {
+                    if (A[sb] == 1)
+                    {
+                        B.Add(sb);
+                        A[sb]++;
+                    }
+                }
+            else A.Add(sb,1);        
+        }
+        return B;
+    }
+}
+/*
+Regex.Matches(str, "SHL").Count
+*/
+/*
+https://leetcode.com/problems/repeated-dna-sequences/
+*/
