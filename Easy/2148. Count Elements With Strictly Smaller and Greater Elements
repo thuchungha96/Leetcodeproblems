@@ -1,0 +1,12 @@
+public class Solution {
+    public int CountElements(int[] nums) {
+        Array.Sort(nums);
+        int min = nums[0], max = nums[nums.Length-1], count = 0;
+        for (int i=0; i< nums.Length; i++)
+            count += (min < nums[i] && nums[i] < max) ? 1 : 0;
+        return count;
+    }
+}
+/*
+https://leetcode.com/problems/count-elements-with-strictly-smaller-and-greater-elements/
+*/
