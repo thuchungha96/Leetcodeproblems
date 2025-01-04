@@ -1,0 +1,25 @@
+public class Solution {
+    public int CountPalindromicSubsequence(string s) {
+        Dictionary<char, int> A = new Dictionary<char, int>();
+        Dictionary<char, int> B = new Dictionary<char, int>();
+        for(int i=0; i<s.Length; i++)
+        {
+            if (!A.ContainsKey(s[i])) A[s[i]]  = i;
+            B[s[i]] = i;
+        }
+        int count =0;
+        foreach(var o in A){
+            List<char> C = new List<char>();
+            for (int i=o.Value+1; i<B[o.Key]; i++)
+                if (!C.Any(x => x == s[i]))
+                {
+                    C.Add(s[i]);
+                    count++;
+                }
+        }
+        return count;
+    }
+}
+/*
+https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/
+*/
