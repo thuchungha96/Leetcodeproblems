@@ -1,0 +1,26 @@
+public class Solution {
+    public string ShiftingLetters(string s, int[][] shifts) {
+        int[] A = new int[s.Length];
+        char[] B = s.ToCharArray();
+        foreach (var o in shifts) {
+            int direction = o[2] == 1 ? 1 : -1;
+            A[o[0]] += direction;
+            if (o[1] + 1 < s.Length) {
+                A[o[1] + 1] -= direction;
+            }
+        }
+        for (int i = 1; i<s.Length; i++) {
+            A[i] = A[i] + A[i - 1];
+        }
+        for (int i = 0; i<s.Length; i++) {
+            int a = (B[i] - 'a') + A[i];
+            int b = (a % 26 + 26) % 26;
+
+            B[i] = (char)(b + 'a');
+        }
+        return new string(B);
+    }
+}
+/*
+https://leetcode.com/problems/shifting-letters-ii
+*/
