@@ -1,0 +1,67 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+ /*
+public class TreeIndex{
+    public int Value {get; set;}
+    public int Parent {get;set;}
+    public int Deep {get;set;}
+}
+public class Solution {
+    private List<TreeIndex> A = new List<TreeIndex>();
+    private void goDeep(TreeNode r, int DeepA){
+        if (r.left != null) {
+            A.Add(new TreeIndex(){Value = r.left.val, Parent = r.val, Deep = DeepA+1});
+            goDeep(r.left,DeepA+1);
+        }
+         if (r.right != null) {
+           A.Add(new TreeIndex(){Value = r.right.val, Parent = r.val, Deep = DeepA+1});
+            goDeep(r.right,DeepA+1);
+        }
+    }
+    public bool IsCousins(TreeNode root, int x, int y) {
+        A = new List<TreeIndex>();
+        goDeep(root,0);
+        TreeIndex left = A.FirstOrDefault(o => o.Value == x);
+        TreeIndex right = A.FirstOrDefault(o => o.Value == y);
+        if (left == null || right == null || left.Parent == right.Parent || left.Deep != right.Deep) return false;
+        return true;
+    }
+}
+*/
+public class Solution {
+    private int depthX = -1, parentX = -1;
+    private int depthY = -1, parentY = -1;
+    private void goDepth(TreeNode r, int depth, int x, int y){
+        if (depthX != -1 && depthY != -1) return;
+        if (r.left != null)
+        { 
+            goDepth(r.left,depth+1,x,y);
+            if (r.left.val == x) { depthX = depth+1; parentX = r.val; }
+            if (r.left.val == y) { depthY = depth+1; parentY = r.val; }
+        }
+        if (r.right != null)
+        { 
+            goDepth(r.right,depth+1,x,y);
+            if (r.right.val == x) { depthX = depth+1; parentX = r.val; }
+            if (r.right.val == y) { depthY = depth+1; parentY = r.val; }
+        }
+    }
+    public bool IsCousins(TreeNode root, int x, int y) {
+        goDepth(root,0,x,y);
+        return (depthX == depthY ? depthX == -1 ? false : parentX == parentY ? false : true : false);
+    }
+}
+/*
+https://leetcode.com/problems/cousins-in-binary-tree/description/
+*/
