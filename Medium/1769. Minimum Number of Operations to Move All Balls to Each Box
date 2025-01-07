@@ -1,0 +1,16 @@
+public class Solution {
+    public int[] MinOperations(string boxes) {
+        List<int> A = new List<int>();
+        for (int i=0; i<boxes.Length; i++){
+            int count = 0;
+            for (int j=0; j<boxes.Length; j++)
+                if (i != j && boxes[j] == '1')
+                    count += Math.Abs(j-i);
+            A.Add(count);
+        }
+        return A.ToArray();
+    }
+}
+/*
+https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/description/
+*/
