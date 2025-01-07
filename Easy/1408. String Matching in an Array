@@ -1,0 +1,13 @@
+public class Solution {
+    public IList<string> StringMatching(string[] words) {
+        List<string> A = new List<string>();
+        for(int i=0; i<words.Count(); i++){
+            var o = words.Where(x => x.Contains(words[i])).ToList();
+            if (o != null && o.Count() > 1) A.Add(words[i]);
+        }
+        return A;
+    }
+}
+/*
+https://leetcode.com/problems/string-matching-in-an-array/description/
+*/
