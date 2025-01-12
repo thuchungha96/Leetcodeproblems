@@ -1,0 +1,38 @@
+public class Solution {
+    public IList<string> WordSubsets(string[] words1, string[] words2) {
+        int[] A = new int[26];
+        List<string> C = new List<string>();
+        foreach(var w in words2)
+        {
+            int[] B = new int[26];
+            foreach(var o in w)
+            {
+                int index = o - 'a';
+                B[index]++;
+                A[index] = Math.Max(A[index], B[index]);
+            }
+        }
+        foreach(var w in words1)
+        {
+            int[] B = new int[26];
+            foreach(var ch in w)
+            {
+                B[ch-'a']++;
+            }
+            C.Add(w);
+            for(int i = 0;i<26;i++)
+            {
+                if(B[i]<A[i])
+                {
+                    C.RemoveAt(C.Count-1);
+                    break;
+                }
+            }
+        }
+
+        return C;
+    }
+}
+/*
+https://leetcode.com/problems/word-subsets/description/
+*/
